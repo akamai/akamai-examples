@@ -1,19 +1,25 @@
-# name of your snippet. For example "Redirect specific URL without slash to same URL with a slash at the end
+# Name of your snippet 
+For example "Redirect specific URL without slash to same URL with a slash at the end"
 
 # Use Case
-Explain the use case your code is going to provide
+Explain the use case your code is going to provide. For example:
+```
+Some Web Servers only return the default html file (usually index.html) when the URL ends in a slash. The code below automatically returns 
+a permanent redirect for a specific URL which does not end with a slash with a counterpart URL ending in slash so the default HTML can be
+displayed
+```
 
 # Installation instructions:
 
 ## Using the Property Manager User Interface
 * Login to the Luna Control Center (Akamai Console) at https://control.akamai.com/ 
-* Press the Context Selector Orange Button ![Context Selector](./luna_context_selector.png)
+* Press the Context Selector Orange Button 
+![Context Selector](./luna_context_selector.png)
 * Type the name of the property you want to modify and click on the hyperlink
 * Click the gearbox icon on the "Actions" column of the version you want to build your configuration upon and click "Edit New Version"
 * Click the "Add Rule" button, select "Blank Rule Template", give it a name and click "Insert Rule"
 * Follow the screenshot below to define the rule
-![Property Manager Rule]
-(./redirect-to-dir-with-slash.png)
+![Property Manager Rule](./redirect-to-dir-with-slash.png)
 * Save the configuration and Activate in Staging
 * Test the new functionality on the Staging network
 
