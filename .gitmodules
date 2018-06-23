@@ -1,0 +1,3 @@
+[submodule "redirect-to-dir-with-slash"]
+	path = redirect-to-dir-with-slash
+	url = https://github.com/javiergarza/md-snippets_redirect-to-dir-with-slash.git
