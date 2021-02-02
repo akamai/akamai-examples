@@ -1,4 +1,4 @@
-# md-snippets
+# Akamai Examples
 Snippets of code to run logic at Akamai Edge Servers
 
 Anybody can contribute a MD Snippet by just sharing 3 files into a github subrepo under https://github.com/akamai/md-snippets.git: 
