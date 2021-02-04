@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>ESI Examples from www.akamai.com</title>
+</head>
+<body>
+<div align="Center">
+<h2>ESI Examples from www.akamai.com<br>
+</h2>
+</div>
+<h2>Example 1</h2>
+The following esi code is used for the www.akamai.com search input box. The
+Netscape web browser sizes text input boxes differently from other browsers.
+This example is a browser detect that ajusts the size of the text input based
+upon which browser is being used so that the text size box is consistent
+across browsers.<pre>&lt;!--esi<br>&lt;esi:choose&gt;<br>  &lt;esi:when test="$(HTTP_USER_AGENT{browser})=='MOZILLA'"&gt;<br>    &lt;input type="text" name="criteria" size="7"&gt;<br>  &lt;/esi:when&gt;<br>  &lt;esi:otherwise&gt;<br>    &lt;input type="text" name="criteria" size="14"&gt;<br>  &lt;/esi:otherwise&gt;<br>&lt;/esi:choose&gt;<br>--&gt;<br>&lt;esi:remove&gt;<br>  &lt;input type="text" name="criteria" size="7"&gt;<br>&lt;/esi:remove&gt;</pre>
+
+<br>ESI Output:<br>
+
+<!--esi
+<esi:choose>
+  <esi:when test="$(HTTP_USER_AGENT{browser})=='MOZILLA'">
+    <input type="text" name="criteria" size="7">
+  </esi:when>
+  <esi:otherwise>
+    <input type="text" name="criteria" size="14">
+  </esi:otherwise></esi:choose>
+-->
+<esi:remove>
+  <input type="text" name="criteria" size="7">
+</esi:remove>
+
+
+
+<h2>Example 2</h2>
+The following esi code is used for the customer testimonials on the www.akamai.com
+home page. The included file is a ColdFusion script that selects one of four
+graphics at random and displays them. <pre>&lt;esi:include src="http://www.akamai.com/cfcgi/quote_swap.dbm" ttl="5m"/&gt;<br>&lt;esi:remove&gt;<br>  &lt;img src="/graphics/layout/quote1.jpg" width="144" height="193" border="0"&gt;<br>&lt;/esi:remove&gt;<br><br></pre>
+
+<br>ESI Output:<br>
+
+<esi:include src="http://www.akamai.com/cfcgi/quote_swap.dbm" ttl="5m"/>
+<esi:remove>
+  <img src="/graphics/layout/quote1.jpg" width="144" height="193" border="0">
+</esi:remove>
+
+</body>
+</html>

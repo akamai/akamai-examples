@@ -1,0 +1,25 @@
+<esi:comment text="determine if page is being called as a fragment or directly"/>
+
+<esi:choose>
+  <esi:when test="!$(QUERY_STRING)">
+    <esi:include src="viewsource.html?rp=$(REQUEST_PATH)"/>
+  </esi:when>
+  <esi:otherwise>
+    <p>
+    <esi:choose>
+      <esi:when test="$(HTTP_USER_AGENT{'browser'}) == 'MSIE'">
+        <a href="view-source:http://$(HTTP_HOST)/viewsource$(QUERY_STRING{'rp'})">[View ESI Source]</a><br>
+      </esi:when>
+      <esi:otherwise>
+        <a href="/viewsource$(QUERY_STRING{'rp'})">[View ESI Source]</a><br>
+      </esi:otherwise>
+    </esi:choose>
+    (You may have to view the page source to view the ESI code after clicking on the link)
+    <p>
+    <esi:choose>
+      <esi:when test="$(QUERY_STRING{'rp'}) != '/' & $(QUERY_STRING{'rp'}) != '/index.html'">
+        <a href="index.html">Example Home Page</a><br>
+      </esi:when>
+    </esi:choose>
+  </esi:otherwise>
+</esi:choose>

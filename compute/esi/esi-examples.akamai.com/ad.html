@@ -1,0 +1,53 @@
+<html>
+<body>
+
+<esi:choose>
+  <esi:when test="$(HTTP_USER_AGENT{'version'}) matches '^5\.[0-9]+' | $(HTTP_USER_AGENT{'version'}) matches '^4\.[0-9]+'">
+    <esi:choose>
+      <esi:when test="$(HTTP_USER_AGENT{'browser'}) == 'MSIE'">
+        <esi:assign name="isIE" value="true"/>
+      </esi:when>
+      <esi:when test="$(HTTP_USER_AGENT{'browser'}) == 'MOZILLA'">
+        <esi:assign name="isNN" value="true"/>
+      </esi:when>
+    </esi:choose>
+  </esi:when>
+</esi:choose>
+
+<esi:try>
+  <esi:attempt>
+      <esi:choose>
+        <esi:when test="$(isIE) == 'true'">
+          <esi:include src="getIFrameAdfromDB.cgi" maxwait="5000"/>
+        </esi:when>
+        <esi:when test="$(isNN) == 'true'">
+          <esi:include src="getJavaScriptAdfromDB.cgi" maxwait="5000"/>
+        </esi:when>
+        <esi:otherwise>
+          <esi:include src="getHTMLAdfromDB.cgi" maxwait="5000"/>
+        </esi:otherwise>
+      </esi:choose>
+  </esi:attempt>
+  <esi:except>
+    <esi:choose>
+      <esi:when test="$(isIE) == 'true'">
+        <iframe src="http://ad.doubleclick.net/adi/directory.aj.com/;kw=Recreation;sz=468x60;ord=$rand()?" width="468" height="60" border="0" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no">
+        <a href="http://ad.doubleclick.net/jump/directory.aj.com/;kw=Recreation;sz=468x60;ord=$last_rand()?">
+        <img src="http://ad.doubleclick.net/ad/directory.aj.com/;kw=Recreation;sz=468x60;ord=$last_rand()?" WIDTH="468" HEIGHT="60" BORDER="0"></a>
+        </iframe>
+      </esi:when>
+      <esi:when test="$(isNN) == 'true'">
+        <SCRIPT language="JavaScript" SRC="http://ad.doubleclick.net/adj/directory.aj.com/;kw=Recreation;sz=468x60;ord=$rand()?"></SCRIPT>
+      </esi:when>
+      <esi:otherwise>
+        <a href="http://ad.doubleclick.net/jump/directory.aj.com/;abr=!ie;abr=!webtv;kw=Recreation;sz=468x60;ord=$rand()?">
+        <img src="http://ad.doubleclick.net/ad/directory.aj.com/;abr=!ie;abr=!webtv;kw=Recreation;sz=468x60;ord=$last_rand()?" WIDTH="468" HEIGHT="60" BORDER="0"></a>
+      </esi:otherwise>
+    </esi:choose>
+  </esi:except>
+</esi:try>
+
+<esi:include src="viewsource.html?rp=$(REQUEST_PATH)"/>
+
+</body>
+</html>

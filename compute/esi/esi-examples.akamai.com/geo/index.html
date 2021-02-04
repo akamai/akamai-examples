@@ -1,0 +1,17 @@
+<esi:choose>
+  <esi:when test="$(GEO{'country_code'}) == 'US'">
+    <esi:include src="/geo/us/index.html"/>
+  </esi:when>
+  <esi:when test="$(GEO{'country_code'}) == 'DE'">
+    <esi:include src="/geo/de/index.html"/>
+  </esi:when>
+  <esi:when test="$(GEO{'country_code'}) == 'JP'">
+    <esi:include src="/geo/jp/index.html"/>
+  </esi:when>
+  <esi:when test="$(GEO{'country_code'}) == 'FR'">
+    <esi:include src="/geo/fr/index.html"/>
+  </esi:when>
+  <esi:otherwise>
+    <esi:include src="/geo/us/index.html"/>
+  </esi:otherwise>
+</esi:choose>
