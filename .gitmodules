@@ -1,0 +1,3 @@
+[submodule "compute/edgeworkers"]
+	path = compute/edgeworkers
+	url = https://github.com/akamai/edgeworkers-examples.git
