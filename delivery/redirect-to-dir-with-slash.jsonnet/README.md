@@ -32,13 +32,13 @@ Redirection snippet is implemented as function in Jsonnet - see [papi-stdlib.lib
 
 In order to use it in your property (that should also be managed with Jsonnet), import the file first:
 
-```json
+```
 local papi_std = import 'papi-stdlib.libsonnet';
 ```
 
 and invoke function whenever you want this rule be inserted:
 
-```json
+```
     ...
     "rules": {
         "name": "default",
@@ -54,7 +54,7 @@ and invoke function whenever you want this rule be inserted:
 
 When Jsonnet property is compiled to JSON, the function will return redirection in JSON and the code will be injected into the final JSON:
 
-```json
+```
 ❯ jsonnet -J . my_property.v234.jsonnet > my_property.v234.jsonnet
 ❯ cat my_property.v234.jsonnet
 
