@@ -1,287 +1,134 @@
 {
-	"info": {
-		"_postman_id": "aac24ee3-0e00-4a22-8d7e-bc1fcb721bdf",
-		"name": "Akamai Fast Purge",
-		"description": "Purge content from your Akamai Edge servers by URL, ARL, content provider (CP) code, or cache tag.\n\nMore information on https://developer.akamai.com/api/core_features/fast_purge/v3.html\n\nDon't forget to set your environment with the following variables: (the values for first 4 variables come from the API credentials you downloaded on control.akamai.com. The network can have \"staging\" or \"production\")\nhost\naccess_token\nclient_token\nclient_secret\n\nAlso two global variables should be set:\nbaseUrl which should have a value of \"https://{{host}}/ccu/v3\"\nnetwork which should have a value of \"staging\" or \"production\"\n\nAnd additional global variable \"accountSwitchKey\" can be used by API credentials which have the permission to manage other accounts to indicate the account ID you want to manage",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
+	"id": "f68f4ac1-af0c-4edf-a041-a46713ac18a0",
+	"name": "Akamai w/vars",
+	"values": [
 		{
-			"name": "v3",
-			"item": [
-				{
-					"name": "delete",
-					"item": [
-						{
-							"name": "POST delete-cpcode-network",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"objects\": [\n        12345,\n        98765\n    ]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/ccu/v3/delete/cpcode/:network",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"ccu",
-										"v3",
-										"delete",
-										"cpcode",
-										":network"
-									],
-									"variable": [
-										{
-											"key": "network",
-											"value": "{{network}}"
-										}
-									]
-								},
-								"description": "Delete by CP code: Deletes content on the selected CP code for\nthe selected `network`.  In most cases, you should\n[invalidate](#postinvalidatecpcode) rather than\ndelete content.\n"
-							},
-							"response": []
-						},
-						{
-							"name": "POST delete-tag-network",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"objects\": [\n        \"black-friday\",\n        \"electronics\",\n        \"laptops\",\n        \"tablets\"\n    ]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/ccu/v3/delete/tag/:network",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"ccu",
-										"v3",
-										"delete",
-										"tag",
-										":network"
-									],
-									"variable": [
-										{
-											"key": "network",
-											"value": "{{network}}"
-										}
-									]
-								},
-								"description": "Delete by cache tag: Deletes content on the selected set of\ncache tags for the selected `network`.  In most cases, you\nshould [invalidate](#postinvalidatebycachetag) rather\nthan delete content.\n"
-							},
-							"response": []
-						},
-						{
-							"name": "POST delete-url-network",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"objects\": [\n        \"https://foo1.bar.com/some/path\",\n        \"http://foo2.bar.com/some/other/path\"\n    ]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/ccu/v3/delete/url/:network",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"ccu",
-										"v3",
-										"delete",
-										"url",
-										":network"
-									],
-									"variable": [
-										{
-											"key": "network",
-											"value": ""
-										}
-									]
-								},
-								"description": "Delete URL(s) from the Akamai cache"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "invalidate",
-					"item": [
-						{
-							"name": "POST invalidate-cpcode-network",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"objects\": [\n        12345,\n        98765\n    ]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/ccu/v3/invalidate/cpcode/:network",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"ccu",
-										"v3",
-										"invalidate",
-										"cpcode",
-										":network"
-									],
-									"variable": [
-										{
-											"key": "network",
-											"value": "{{network}}"
-										}
-									]
-								},
-								"description": "Invalidate by CP code: Invalidates content on the selected CP\ncode for the selected `network`.  You should consider\ninvalidating content by default. This keeps each object in cache\nuntil the version on your origin server is newer.  Deletion\nretrieves the object regardless, which can dramatically increase\nthe load on your origin server and would prevent Akamai from\nserving the old content if your origin is unreachable.\n"
-							},
-							"response": []
-						},
-						{
-							"name": "POST invalidate-tag-network",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"objects\": [\n        \"black-friday\",\n        \"electronics\",\n        \"laptops\",\n        \"tablets\"\n    ]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/ccu/v3/invalidate/tag/:network",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"ccu",
-										"v3",
-										"invalidate",
-										"tag",
-										":network"
-									],
-									"variable": [
-										{
-											"key": "network",
-											"value": "{{network}}"
-										}
-									]
-								},
-								"description": "Invalidate by cache tag: Invalidates content on the selected set\nof cache tags for the selected `network`.  You should consider\ninvalidating content by default. This keeps each object in cache\nuntil the version on your origin server is newer.  Deletion\nretrieves the object regardless, which can dramatically increase\nthe load on your origin server and would prevent Akamai from\nserving the old content if your origin is unreachable.\n"
-							},
-							"response": []
-						},
-						{
-							"name": "POST invalidate-url-network",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"objects\": [\n        \"https://foo1.bar.com/some/path\",\n        \"http://foo2.bar.com/some/other/path\"\n    ]\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/ccu/v3/invalidate/url/:network",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"ccu",
-										"v3",
-										"invalidate",
-										"url",
-										":network"
-									],
-									"variable": [
-										{
-											"key": "network",
-											"value": "{{network}}"
-										}
-									]
-								},
-								"description": "Invalidate by URL or ARL: Invalidates content on the selected URL or ARL \nfor the selected `network`. You should consider invalidating\ncontent by default. This keeps each object in cache until the\nversion on your origin server is newer.  Deletion retrieves the\nobject regardless, which can dramatically increase the load on\nyour origin server and would prevent Akamai from serving the\nold content if your origin is unreachable. URLs and ARLs can be \nsubmitted in the same request. Note that it takes longer to purge ARLs when \nusing the [Control Center](https://control.akamai.com/apps/fast-purge/#/ccu-main) \ninterface. Use this API to purge them within five seconds.\n"
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		}
-	],
-	"auth": {
-		"type": "edgegrid",
-		"edgegrid": [
-			{
-				"key": "baseURL",
-				"value": "http://{{host}}/ccu/v3",
-				"type": "string"
-			},
-			{
-				"key": "clientSecret",
-				"value": "{{client_secret}}",
-				"type": "string"
-			},
-			{
-				"key": "clientToken",
-				"value": "{{client_token}}",
-				"type": "string"
-			},
-			{
-				"key": "accessToken",
-				"value": "{{access_token}}",
-				"type": "string"
-			}
-		]
-	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			"key": "host",
+			"value": "",
+			"enabled": true
 		},
 		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			"key": "client_secret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "client_token",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://{{host}}",
+			"enabled": true
+		},
+		{
+			"key": "network",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "accountSwitchKey",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "contractId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "groupId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "bulkActivationId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "behaviorId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "overrideId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "options",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "edgeHostnameId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "productId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "propertyId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ruleFormat",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "filename",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "activationId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "version",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "policyId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "enrollmentId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "certificateCn",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "changeId",
+			"value": "",
+			"enabled": true
 		}
-	]
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-02-24T02:09:02.492Z",
+	"_postman_exported_using": "Postman/8.0.6"
 }
